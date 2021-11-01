@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" style="-fx-background-color: #DFE7EF;" stylesheets="@Estilos/bordes.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="256.0" layoutY="81.0" prefHeight="480.0" prefWidth="505.0" style="-fx-background-color: #EEF3F7;" styleClass="radio">
+         <children>
+            <Text layoutX="42.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leonard Cohen">
+               <font>
+                  <Font name="DejaVu Serif Bold" size="24.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="240.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@imagenes/Iconos/next.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="42.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/Iconos/corazon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="135.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/Iconos/href2.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="42.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Everybody Knows" />
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="321.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/Iconos/next.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="90.0" fitWidth="81.0" layoutX="410.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/Iconos/play.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="298.0" layoutX="112.0" layoutY="338.0" pickOnBounds="true">
+               <image>
+                  <Image url="@imagenes/Iconos/bar.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="26.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/Iconos/altavoz2_preview_rev_1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="256.0" fitWidth="256.0" layoutX="384.0" layoutY="6.0" pickOnBounds="true" styleClass="img">
+         <image>
+            <Image url="@imagenes/LeonarKoen%20everybody%20knows.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
