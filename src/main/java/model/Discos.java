@@ -1,27 +1,28 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Discos {
 	protected int id;
 	protected String nombre;
 	protected String foto;
-	protected LocalDate fecha;
+	protected LocalDateTime fecha;
 	protected Artistas ar;
 
 	public Discos() {
 
 	}
 
-	public Discos(String nombre, String foto, LocalDate fecha, Artistas ar) {
+	public Discos(String nombre, String foto, LocalDateTime fecha, Artistas ar) {
 		this.nombre = nombre;
 		this.foto = foto;
 		this.fecha = fecha;
 		this.ar = ar;
 	}
 
-	public Discos(int id, String nombre, String foto, LocalDate fecha, Artistas ar) {
+	public Discos(int id, String nombre, String foto, LocalDateTime fecha, Artistas ar) {
 		this.id = id;
 		this.nombre = nombre;
 		this.foto = foto;
@@ -53,11 +54,11 @@ public class Discos {
 		this.foto = foto;
 	}
 
-	public LocalDate getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
 

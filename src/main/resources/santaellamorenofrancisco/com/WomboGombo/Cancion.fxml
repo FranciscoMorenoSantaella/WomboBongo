@@ -10,7 +10,7 @@
    <children>
       <AnchorPane layoutX="256.0" layoutY="81.0" prefHeight="480.0" prefWidth="505.0" style="-fx-background-color: #EEF3F7;" styleClass="radio">
          <children>
-            <Text layoutX="42.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leonard Cohen">
+            <Text layoutX="42.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="icon" text="Leonard Cohen">
                <font>
                   <Font name="DejaVu Serif Bold" size="24.0" />
                </font>
@@ -20,7 +20,7 @@
                   <Image url="@imagenes/Iconos/next.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="42.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="42.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                <image>
                   <Image url="@imagenes/Iconos/corazon.png" />
                </image>

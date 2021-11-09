@@ -11,6 +11,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <JFXTextField layoutX="445.0" layoutY="263.0" promptText="Usuario" />
+      <JFXPasswordField layoutX="444.0" layoutY="322.0" promptText="Contraseña" />
+      <JFXButton layoutX="489.0" layoutY="398.0" style="-fx-background-color: #DC7633;" text="Login" textFill="WHITE" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="456.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/monkey.png" />
@@ -21,8 +24,5 @@
             <Font name="Frank Ruehl CLM Bold" size="24.0" />
          </font>
       </Text>
-      <JFXPasswordField layoutX="444.0" layoutY="322.0" promptText="Contraseña" />
-      <JFXTextField layoutX="445.0" layoutY="263.0" promptText="Usuario" />
-      <JFXButton layoutX="489.0" layoutY="398.0" style="-fx-background-color: #DC7633;" text="Login" textFill="#030000" />
    </children>
 </AnchorPane>

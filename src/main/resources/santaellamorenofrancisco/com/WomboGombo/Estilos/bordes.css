@@ -22,3 +22,9 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
+
+
+.icon{
+  -fx-background-color: #383838;
+    -fx-scale-y: 1.1;
+}
