@@ -7,8 +7,8 @@ public class Canciones {
 	protected String nombre;
 	protected int duracion;
 	protected int nReproducciones;
-	protected Discos dis;
-	protected Generos ge;
+	protected Discos disk;
+	protected Generos gen;
 
 	public Canciones() {
 		id = -1;
@@ -18,21 +18,21 @@ public class Canciones {
 
 	}
 
-	public Canciones(String nombre, int duracion, int nReproducciones, Discos dis, Generos ge) {
+	public Canciones(String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
 		this.nombre = nombre;
 		this.duracion = duracion;
 		this.nReproducciones = nReproducciones;
-		this.dis = dis;
-		this.ge = ge;
+		this.disk = disk;
+		this.gen = gen;
 	}
 
-	public Canciones(int id, String nombre, int duracion, int nReproducciones, Discos dis, Generos ge) {
+	public Canciones(int id, String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
 		this.id = id;
 		this.nombre = nombre;
 		this.duracion = duracion;
 		this.nReproducciones = nReproducciones;
-		this.dis = dis;
-		this.ge = ge;
+		this.disk = disk;
+		this.gen = gen;
 	}
 
 	public int getId() {

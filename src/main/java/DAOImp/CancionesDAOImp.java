@@ -15,25 +15,23 @@ import model.Generos;
 
 public class CancionesDAOImp extends Canciones implements CancionesDAO {
 	private static final String MOSTRARTODOS = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones";
-	private static final String AÑADIRCANCIONES = "INSERT INTO canciones (id,nombre,duracion,nReproducciones,id_discos,id_generos) VALUES (?,?,?,?,?,?)";
+	private static final String AÑADIRCANCIONES = "INSERT INTO canciones (nombre,duracion,nReproducciones,id_discos,id_generos) VALUES (?,?,?,?,?)";
 	private static final String BORRARCANCIONES = "DELETE FROM canciones WHERE canciones.id = ?";
 	private static final String EDITARCANCIONES = "UPDATE canciones set nombre=?, duracion=?, nReproducciones=?, id_discos=?,id_generos=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones WHERE canciones.id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones WHERE canciones.nombre=?";
 	private Connection con;
-	private Discos disk;
-	private Generos gen;
 	private boolean persisted = false;
 
-	CancionesDAOImp() {
+	public CancionesDAOImp() {
 		super();
 	}
 
-	CancionesDAOImp(String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
+	public CancionesDAOImp(String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
 		super(nombre, duracion, nReproducciones, disk, gen);
 	}
 
-	CancionesDAOImp(int id, String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
+	public CancionesDAOImp(int id, String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
 		super(id, nombre, duracion, nReproducciones, disk, gen);
 	}
 
@@ -49,8 +47,9 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 				ps.setString(1, this.nombre);
 				ps.setInt(2, this.duracion); // Para convertir LocalDate al formato DATE
 				ps.setInt(3, this.nReproducciones);
-				ps.setObject(4, this.disk.getId());
+				ps.setObject(4, this.disk.getId() );
 				ps.setObject(5, this.gen.getId());
+				ps.setInt(6, this.id);
 				ps.executeUpdate();
 				rs = ps.getGeneratedKeys();
 				if (rs.next()) {
@@ -73,13 +72,61 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 
 	@Override
 	public void editar() {
-		// TODO Auto-generated method stub
+		con = Conexion.getConnection();
+		if (con != null) {
 
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(EDITARCANCIONES);
+				ps.setString(1, this.nombre);
+				ps.setInt(2, this.duracion);
+				ps.setInt(3, this.nReproducciones);
+				ps.setObject(4, this.disk.getId());
+				ps.setObject(5, this.gen.getId());
+				ps.setInt(6, this.id);
+				ps.executeUpdate();
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		}
 	}
 
 	@Override
 	public void borrar() {
-		// TODO Auto-generated method stub
+		con = Conexion.getConnection();
+
+		if (con != null) {
+
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(BORRARCANCIONES);
+				ps.setInt(1, this.id);
+				ps.executeUpdate();
+				this.id = -1;
+
+				ps.executeUpdate();
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		}
 
 	}
 

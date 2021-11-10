@@ -27,7 +27,6 @@ public class DiscosDAOImp extends Discos implements DiscosDAO {
 	private Connection con;
 	private boolean persisted = false;
 	private Date date;
-	private List<Artistas> arl;
 	private LocalDate ld;
 
 	public DiscosDAOImp() {
@@ -109,7 +108,6 @@ public class DiscosDAOImp extends Discos implements DiscosDAO {
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -188,7 +186,7 @@ public class DiscosDAOImp extends Discos implements DiscosDAO {
 				if (rs.next()) {
 					ArtistasDAOImp ar = new ArtistasDAOImp();
 					Artistas ar1 = ar.mostrarPorId(rs.getInt("id_artistas"));
-					resultado = (new Discos(rs.getInt("id"), rs.getString("nombre"), rs.getString("foto"),
+					resultado = (new DiscosDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getString("foto"),
 							rs.getDate("fecha").toLocalDate(), ar1));
 
 
@@ -215,7 +213,7 @@ public class DiscosDAOImp extends Discos implements DiscosDAO {
 				if (rs.next()) {
 					ArtistasDAOImp ar = new ArtistasDAOImp();
 					Artistas ar1 = ar.mostrarPorId(rs.getInt("id_artistas"));
-					resultado = (new Discos(rs.getInt("id"), rs.getString("nombre"), rs.getString("foto"),
+					resultado = (new DiscosDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getString("foto"),
 							rs.getDate("fecha").toLocalDate(), ar1));
 				}
 			} catch (Exception e) {
