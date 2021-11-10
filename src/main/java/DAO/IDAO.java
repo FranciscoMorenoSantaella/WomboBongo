@@ -8,7 +8,8 @@ public interface IDAO<T>{
 	void guardar();
 	void editar();
 	void borrar();
-	List<T> mostrarTodos(/*int page*/) throws SQLException;
+	List<T> mostrarTodos() throws SQLException;
 	T mostrarPorId(int id);
+	T mostrarPorNombre(String nombre);
 
 }

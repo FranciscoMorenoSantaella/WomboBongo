@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Artistas;
+import model.Discos;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -47,14 +48,11 @@ public class App extends Application {
     public static void main(String[] args) {
     	ArtistasDAOImp ar = new ArtistasDAOImp();
     	
-    	ar = (ArtistasDAOImp) ar.mostrarPorNombre("hola");
-    	ar.setNombre("adios");
+    	ar = (ArtistasDAOImp) ar.mostrarPorNombre("adios");
     	System.out.println(ar);
-    	ar.editar();
-
-    	DiscosDAOImp disk1 = new DiscosDAOImp(3,"lolo","no",LocalDateTime.of(2001, Month.AUGUST, 1,0,0), ar);
+    	DiscosDAOImp disk =  new DiscosDAOImp();
+    	System.out.println(disk.mostrarPorId(15));
     	
-    	disk1.editar();
     	
     	
         launch();

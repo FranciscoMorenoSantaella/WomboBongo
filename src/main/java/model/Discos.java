@@ -8,21 +8,21 @@ public class Discos {
 	protected int id;
 	protected String nombre;
 	protected String foto;
-	protected LocalDateTime fecha;
+	protected LocalDate fecha;
 	protected Artistas ar;
 
 	public Discos() {
 
 	}
 
-	public Discos(String nombre, String foto, LocalDateTime fecha, Artistas ar) {
+	public Discos(String nombre, String foto, LocalDate fecha, Artistas ar) {
 		this.nombre = nombre;
 		this.foto = foto;
 		this.fecha = fecha;
 		this.ar = ar;
 	}
 
-	public Discos(int id, String nombre, String foto, LocalDateTime fecha, Artistas ar) {
+	public Discos(int id, String nombre, String foto, LocalDate fecha, Artistas ar) {
 		this.id = id;
 		this.nombre = nombre;
 		this.foto = foto;
@@ -54,11 +54,11 @@ public class Discos {
 		this.foto = foto;
 	}
 
-	public LocalDateTime getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDateTime fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

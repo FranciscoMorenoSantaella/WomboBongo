@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Canciones {
 	protected int id;
 	protected String nombre;
-	protected float duracion;
+	protected int duracion;
 	protected int nReproducciones;
 	protected Discos dis;
 	protected Generos ge;
@@ -13,12 +13,12 @@ public class Canciones {
 	public Canciones() {
 		id = -1;
 		nombre = "noencontrado";
-		duracion = 0.0f;
+		duracion = 0;
 		nReproducciones = 0;
 
 	}
 
-	public Canciones(String nombre, float duracion, int nReproducciones, Discos dis, Generos ge) {
+	public Canciones(String nombre, int duracion, int nReproducciones, Discos dis, Generos ge) {
 		this.nombre = nombre;
 		this.duracion = duracion;
 		this.nReproducciones = nReproducciones;
@@ -26,7 +26,7 @@ public class Canciones {
 		this.ge = ge;
 	}
 
-	public Canciones(int id, String nombre, float duracion, int nReproducciones, Discos dis, Generos ge) {
+	public Canciones(int id, String nombre, int duracion, int nReproducciones, Discos dis, Generos ge) {
 		this.id = id;
 		this.nombre = nombre;
 		this.duracion = duracion;
@@ -51,11 +51,11 @@ public class Canciones {
 		this.nombre = nombre;
 	}
 
-	public float getDuracion() {
+	public int getDuracion() {
 		return duracion;
 	}
 
-	public void setDuracion(float duracion) {
+	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
 
