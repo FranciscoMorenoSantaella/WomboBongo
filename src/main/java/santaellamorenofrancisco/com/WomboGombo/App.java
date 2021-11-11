@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Artistas;
+import model.Canciones;
 import model.Discos;
 import model.Generos;
+import model.Usuarios;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -21,6 +23,7 @@ import DAOImp.ArtistasDAOImp;
 import DAOImp.CancionesDAOImp;
 import DAOImp.DiscosDAOImp;
 import DAOImp.GenerosDAOImp;
+import DAOImp.UsuariosDAOImp;
 import Utils.Conexion;
 import Utils.XMLReader;
 
@@ -49,27 +52,26 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
-		/*ArtistasDAOImp ar = new ArtistasDAOImp();
-
-		ar = (ArtistasDAOImp) ar.mostrarPorNombre("adios");
-		System.out.println(ar);
-
-		GenerosDAOImp gen = new GenerosDAOImp();
-		gen = (GenerosDAOImp) gen.mostrarPorNombre("traca");
-		System.out.println(gen);*/
+		/*
+		 * ArtistasDAOImp ar = new ArtistasDAOImp();
+		 * 
+		 * ar = (ArtistasDAOImp) ar.mostrarPorNombre("adios"); System.out.println(ar);
+		 * 
+		 * GenerosDAOImp gen = new GenerosDAOImp(); gen = (GenerosDAOImp)
+		 * gen.mostrarPorNombre("traca"); System.out.println(gen);
+		 */
 		ArtistasDAOImp ar = new ArtistasDAOImp();
 		DiscosDAOImp disk = new DiscosDAOImp();
 		GenerosDAOImp gen = new GenerosDAOImp();
 		ar = (ArtistasDAOImp) ar.mostrarPorId(1);
-		disk = (DiscosDAOImp) disk.mostrarPorId(1);
+		disk = (DiscosDAOImp) disk.mostrarPorId(3);
 		gen = (GenerosDAOImp) gen.mostrarPorId(1);
-	
-		
-		
-		CancionesDAOImp can = new CancionesDAOImp(4,"al filo",1,1,disk,gen);
-		
-		
-		
+		CancionesDAOImp can = new CancionesDAOImp("al filo", 1, 1, disk, gen);
+		UsuariosDAOImp us = new UsuariosDAOImp();
+		List<Usuarios> uslist = new ArrayList<Usuarios>();
+		uslist = us.mostrarTodos();
+		System.out.println(uslist);
+		System.out.println(us.mostrarPorId(2));
 
 		launch();
 	}

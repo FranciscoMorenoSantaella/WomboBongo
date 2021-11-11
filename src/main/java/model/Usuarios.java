@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Usuarios {
@@ -8,27 +9,33 @@ public class Usuarios {
 	protected String contraseña;
 	protected String correo;
 	protected String foto;
+	protected List<ListaRP> lrp;
 
 	public Usuarios() {
 		id = -1;
 		nombre = "noencontrado";
+		contraseña = "";
 		correo = "noencontrado@noencontrado";
 		foto = "noencontrado";
 	}
 
-	public Usuarios(String nombre, String correo, String foto) {
+	public Usuarios(String nombre, String contraseña, String correo, String foto, List<ListaRP> lrp) {
 		super();
 		this.nombre = nombre;
+		this.contraseña = contraseña;
 		this.correo = correo;
 		this.foto = foto;
+		this.lrp = lrp;
 	}
 
-	public Usuarios(int id, String nombre, String correo, String foto) {
+	public Usuarios(int id, String nombre, String contraseña, String correo, String foto, List<ListaRP> lrp) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.contraseña = contraseña;
 		this.correo = correo;
 		this.foto = foto;
+		this.lrp = lrp;
 	}
 
 	public int getId() {
@@ -63,6 +70,22 @@ public class Usuarios {
 		this.foto = foto;
 	}
 
+	private String getContraseña() {
+		return contraseña;
+	}
+
+	private void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+	public List<ListaRP> getLrp() {
+		return lrp;
+	}
+
+	public void setLrp(List<ListaRP> lrp) {
+		this.lrp = lrp;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -82,7 +105,9 @@ public class Usuarios {
 
 	@Override
 	public String toString() {
-		return "Usuarios [id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", foto=" + foto + "]";
+		return "Usuarios [id=" + id + ", nombre=" + nombre + ", contraseña=" + contraseña + ", correo=" + correo
+				+ ", foto=" + foto + ", lrp=" + lrp + "]";
 	}
 
+	
 }

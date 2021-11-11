@@ -67,6 +67,22 @@ public class Canciones {
 		this.nReproducciones = nReproducciones;
 	}
 
+	public Discos getDisk() {
+		return disk;
+	}
+
+	public void setDisk(Discos disk) {
+		this.disk = disk;
+	}
+
+	public Generos getGen() {
+		return gen;
+	}
+
+	public void setGen(Generos gen) {
+		this.gen = gen;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -87,7 +103,8 @@ public class Canciones {
 	@Override
 	public String toString() {
 		return "Canciones [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + ", nReproducciones="
-				+ nReproducciones + "]";
+				+ nReproducciones + ", disk=" + disk + ", gen=" + gen + "]";
 	}
+	
 
 }

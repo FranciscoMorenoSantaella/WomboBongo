@@ -5,17 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import DAO.CancionesDAO;
 import Utils.Conexion;
+import model.Artistas;
 import model.Canciones;
 import model.Discos;
 import model.Generos;
 
 public class CancionesDAOImp extends Canciones implements CancionesDAO {
 	private static final String MOSTRARTODOS = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones";
-	private static final String AÑADIRCANCIONES = "INSERT INTO canciones (nombre,duracion,nReproducciones,id_discos,id_generos) VALUES (?,?,?,?,?)";
+	private static final String AÑADIRCANCIONES = "INSERT INTO canciones (nombre,duracion,nReproducciones,id_discos,id_generos,id) VALUES (?,?,?,?,?,?)";
 	private static final String BORRARCANCIONES = "DELETE FROM canciones WHERE canciones.id = ?";
 	private static final String EDITARCANCIONES = "UPDATE canciones set nombre=?, duracion=?, nReproducciones=?, id_discos=?,id_generos=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones WHERE canciones.id=?";
@@ -47,7 +49,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 				ps.setString(1, this.nombre);
 				ps.setInt(2, this.duracion); // Para convertir LocalDate al formato DATE
 				ps.setInt(3, this.nReproducciones);
-				ps.setObject(4, this.disk.getId() );
+				ps.setObject(4, this.disk.getId());
 				ps.setObject(5, this.gen.getId());
 				ps.setInt(6, this.id);
 				ps.executeUpdate();
@@ -131,21 +133,112 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 	}
 
 	@Override
-	public List<Canciones> mostrarTodos() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Canciones> mostrarTodos() {
+		List<Canciones> resultado = new ArrayList<Canciones>();
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARTODOS);
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					DiscosDAOImp disk = new DiscosDAOImp();
+					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
+					GenerosDAOImp gen = new GenerosDAOImp();
+					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
+					resultado.add(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+							rs.getInt("nReproducciones"), disk1, gen1));
+
+				}
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return resultado;
 	}
 
 	@Override
 	public Canciones mostrarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Canciones resultado = new CancionesDAOImp();
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+		
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARPORID);
+				ps.setInt(1, id);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					DiscosDAOImp disk = new DiscosDAOImp();
+					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
+					GenerosDAOImp gen = new GenerosDAOImp();
+					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
+					resultado =(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+							rs.getInt("nReproducciones"), disk1, gen1));
+
+				}
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return resultado;
 	}
 
 	@Override
 	public Canciones mostrarPorNombre(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
+		Canciones resultado = new CancionesDAOImp();
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+		
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARPORNOMBRE);
+				ps.setString(1, nombre);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					DiscosDAOImp disk = new DiscosDAOImp();
+					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
+					GenerosDAOImp gen = new GenerosDAOImp();
+					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
+					resultado =(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+							rs.getInt("nReproducciones"), disk1, gen1));
+
+				}
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return resultado;
 	}
 
 }
