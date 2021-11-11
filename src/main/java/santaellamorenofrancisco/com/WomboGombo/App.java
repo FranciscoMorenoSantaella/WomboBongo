@@ -9,6 +9,7 @@ import model.Artistas;
 import model.Canciones;
 import model.Discos;
 import model.Generos;
+import model.ListaRP;
 import model.Usuarios;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ import DAOImp.ArtistasDAOImp;
 import DAOImp.CancionesDAOImp;
 import DAOImp.DiscosDAOImp;
 import DAOImp.GenerosDAOImp;
+import DAOImp.ListaRPDAOImp;
 import DAOImp.UsuariosDAOImp;
 import Utils.Conexion;
 import Utils.XMLReader;
@@ -67,11 +69,12 @@ public class App extends Application {
 		disk = (DiscosDAOImp) disk.mostrarPorId(3);
 		gen = (GenerosDAOImp) gen.mostrarPorId(1);
 		CancionesDAOImp can = new CancionesDAOImp("al filo", 1, 1, disk, gen);
-		UsuariosDAOImp us = new UsuariosDAOImp();
+		UsuariosDAOImp us = new UsuariosDAOImp(1,"Francisco","Francisco","Francisco@gmail.com","foto");
 		List<Usuarios> uslist = new ArrayList<Usuarios>();
-		uslist = us.mostrarTodos();
-		System.out.println(uslist);
-		System.out.println(us.mostrarPorId(2));
+		ListaRPDAOImp lrp = new ListaRPDAOImp();
+		System.out.println(lrp.mostrarPorNombre("rap español"));
+	
+		
 
 		launch();
 	}

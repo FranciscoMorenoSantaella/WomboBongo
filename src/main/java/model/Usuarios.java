@@ -19,6 +19,23 @@ public class Usuarios {
 		foto = "noencontrado";
 	}
 
+	public Usuarios(String nombre, String contraseña, String correo, String foto) {
+		super();
+		this.nombre = nombre;
+		this.contraseña = contraseña;
+		this.correo = correo;
+		this.foto = foto;
+	}
+
+	public Usuarios(int id, String nombre, String contraseña, String correo, String foto) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.contraseña = contraseña;
+		this.correo = correo;
+		this.foto = foto;
+	}
+
 	public Usuarios(String nombre, String contraseña, String correo, String foto, List<ListaRP> lrp) {
 		super();
 		this.nombre = nombre;
@@ -109,5 +126,4 @@ public class Usuarios {
 				+ ", foto=" + foto + ", lrp=" + lrp + "]";
 	}
 
-	
 }

@@ -22,13 +22,23 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	private static final String MOSTRARPORID = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE nombre=?";
 	private static final String MOSTRARMISLISTAS = "SELECT listarp.nombre FROM listarp,usuarios_listarp, usuarios WHERE usuarios.id = usuarios_listarp.id_usuario";
-	private static final String AÑADIRLISTAS = "";
+	private static final String AÑADIRLISTASALUSUARIO = "INSERT INTO usuarios_listarp (id_usuario,id_listarp) VALUES (?,?)";
+	private static final String BORRARLISTASALUSUARIO = "DELETE FROM usuarios_listarp WHERE id=?";
+
 	private List<ListaRP> lrp;
 	private Connection con;
 	private boolean persisted = false;
 
 	public UsuariosDAOImp() {
 		super();
+	}
+
+	public UsuariosDAOImp(String nombre, String contraseña, String correo, String foto) {
+		super(nombre, contraseña, correo, foto);
+	}
+
+	public UsuariosDAOImp(int id, String nombre, String contraseña, String correo, String foto) {
+		super(id, nombre, contraseña, correo, foto);
 	}
 
 	public UsuariosDAOImp(String nombre, String contraseña, String correo, String foto, List<ListaRP> lrp) {
@@ -203,6 +213,50 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 			}
 		}
 		return us;
+	}
+
+	@Override
+	public void añadirlistadelusuario(Usuarios us, ListaRP lrp) {
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(AÑADIRLISTASALUSUARIO);
+				ps.setInt(1, us.getId());
+				ps.setInt(2, lrp.getId());
+				ps.executeUpdate();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
+	}
+
+	@Override
+	public void borrarlistadelusuario(ListaRP lrp) {
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(BORRARLISTASALUSUARIO);
+				ps.setInt(1,lrp.getId());
+				ps.executeUpdate();
+				this.id = -1;
+				ps.executeUpdate();
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		}
 	}
 
 }
