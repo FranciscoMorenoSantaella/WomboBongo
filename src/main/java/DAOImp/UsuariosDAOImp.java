@@ -32,6 +32,10 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	public UsuariosDAOImp() {
 		super();
 	}
+	
+	public UsuariosDAOImp(String nombre, String correo) {
+		super(nombre, correo);
+	}
 
 	public UsuariosDAOImp(String nombre, String contraseña, String correo, String foto) {
 		super(nombre, contraseña, correo, foto);

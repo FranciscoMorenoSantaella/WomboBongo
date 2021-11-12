@@ -7,8 +7,8 @@ public class ListaRP {
 	protected int id;
 	protected String nombre;
 	protected String descripcion;
-	protected List<Canciones> milistadecanciones;
-	protected List<Usuarios> milistadeusuarios;
+	protected List<Canciones> listadecanciones;
+	protected List<Usuarios> milistadesubscritores;
 
 	public ListaRP() {
 
@@ -28,37 +28,37 @@ public class ListaRP {
 	}
 	
 
-	public ListaRP(String nombre, String descripcion, List<Usuarios> milistadeusuarios) {
+	public ListaRP(String nombre, String descripcion, List<Usuarios> milistadesubscritores) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.milistadeusuarios = milistadeusuarios;
+		this.milistadesubscritores = milistadesubscritores;
 	}
 	
 	public ListaRP(String nombre, List<Canciones> canciones,String descripcion) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.milistadecanciones = canciones;
+		this.listadecanciones = canciones;
 	}
 
-	public ListaRP(String nombre, String descripcion, List<Canciones> milistadecanciones,
-			List<Usuarios> milistadeusuarios) {
+	public ListaRP(String nombre, String descripcion, List<Canciones> listadecanciones,
+			List<Usuarios> milistadesubscritores) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.milistadecanciones = milistadecanciones;
-		this.milistadeusuarios = milistadeusuarios;
+		this.listadecanciones = listadecanciones;
+		this.milistadesubscritores = milistadesubscritores;
 	}
 
-	public ListaRP(int id, String nombre, String descripcion, List<Canciones> milistadecanciones,
-			List<Usuarios> milistadeusuarios) {
+	public ListaRP(int id, String nombre, String descripcion, List<Canciones> listadecanciones,
+			List<Usuarios> milistadesubscritores) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.milistadecanciones = milistadecanciones;
-		this.milistadeusuarios = milistadeusuarios;
+		this.listadecanciones = listadecanciones;
+		this.milistadesubscritores = milistadesubscritores;
 	}
 
 	public int getId() {
@@ -85,20 +85,20 @@ public class ListaRP {
 		this.descripcion = descripcion;
 	}
 
-	public List<Canciones> getMilistadecanciones() {
-		return milistadecanciones;
+	public List<Canciones> getlistadecanciones() {
+		return listadecanciones;
 	}
 
-	public void setMilistadecanciones(List<Canciones> milistadecanciones) {
-		this.milistadecanciones = milistadecanciones;
+	public void setlistadecanciones(List<Canciones> listadecanciones) {
+		this.listadecanciones = listadecanciones;
 	}
 
-	public List<Usuarios> getMilistadeusuarios() {
-		return milistadeusuarios;
+	public List<Usuarios> getmilistadesubscritores() {
+		return milistadesubscritores;
 	}
 
-	public void setMilistadeusuarios(List<Usuarios> milistadeusuarios) {
-		this.milistadeusuarios = milistadeusuarios;
+	public void setmilistadesubscritores(List<Usuarios> milistadesubscritores) {
+		this.milistadesubscritores = milistadesubscritores;
 	}
 
 	@Override
@@ -120,8 +120,8 @@ public class ListaRP {
 
 	@Override
 	public String toString() {
-		return "ListaRP [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", milistadecanciones="
-				+ milistadecanciones + ", milistadeusuarios=" + milistadeusuarios + "]";
+		return "ListaRP [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", listadecanciones="
+				+ listadecanciones + ", milistadesubscritores=" + milistadesubscritores + "]";
 	}
 
 }

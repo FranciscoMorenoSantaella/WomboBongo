@@ -18,6 +18,13 @@ public class Usuarios {
 		correo = "noencontrado@noencontrado";
 		foto = "noencontrado";
 	}
+	
+	public Usuarios(String nombre, String correo) {
+		super();
+		this.nombre = nombre;
+		this.correo = correo;
+	}
+
 
 	public Usuarios(String nombre, String contraseña, String correo, String foto) {
 		super();

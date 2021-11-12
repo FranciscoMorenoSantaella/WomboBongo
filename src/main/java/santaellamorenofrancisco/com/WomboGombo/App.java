@@ -68,11 +68,14 @@ public class App extends Application {
 		ar = (ArtistasDAOImp) ar.mostrarPorId(1);
 		disk = (DiscosDAOImp) disk.mostrarPorId(3);
 		gen = (GenerosDAOImp) gen.mostrarPorId(1);
-		CancionesDAOImp can = new CancionesDAOImp("al filo", 1, 1, disk, gen);
-		UsuariosDAOImp us = new UsuariosDAOImp(1,"Francisco","Francisco","Francisco@gmail.com","foto");
+		CancionesDAOImp can = new CancionesDAOImp(2,"al filo", 1, 1, disk, gen);
+		UsuariosDAOImp us = new UsuariosDAOImp(2,"Francisco","Francisco","Francisco@gmail.com","foto");
 		List<Usuarios> uslist = new ArrayList<Usuarios>();
-		ListaRPDAOImp lrp = new ListaRPDAOImp();
-		System.out.println(lrp.mostrarPorNombre("rap español"));
+		ListaRPDAOImp lrp = new ListaRPDAOImp(3,"aaaa","aaaa");
+		lrp.añadirCancionesALaLista(lrp, can);
+		
+
+		
 	
 		
 

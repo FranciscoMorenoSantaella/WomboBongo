@@ -24,6 +24,10 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 	private static final String EDITARLISTARP = "UPDATE listarp set nombre=?,descripcion=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre, descripcion FROM listarp WHERE id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,descripcion FROM listarp WHERE nombre=?";
+	private static final String MOSTRARCANCIONESDELALISTA = "SELECT canciones.nombre FROM canciones,canciones_listarp WHERE canciones.id = canciones_listarp.id_canciones AND canciones.id = ?";
+	private static final String MOSTRARUSUARIOSSUBSCRITOS = "SELECT usuarios.nombre,usuarios.correo FROM listarp, usuarios_listarp, usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND listarp.id = ?";
+	private static final String CUENTAUSUARIOSSUBSCRITOS = "SELECT COUNT(usuarios.nombre) FROM listarp, usuarios_listarp, usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND listarp.id = ?";
+	private static final String AÑADIRCANCIONESALALISTA = "INSERT INTO canciones_listarp (id_listarp,id_canciones) VALUES (?,?)";
 	private Connection con;
 	private boolean persisted = false;
 	private List<Usuarios> us;
@@ -184,7 +188,8 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 				ps.setInt(1, id);
 				rs = ps.executeQuery();
 				if (rs.next()) {
-					resultado = (new ListaRPDAOImp(rs.getInt("id"),rs.getString("nombre"),rs.getString("descripcion")));
+					resultado = (new ListaRPDAOImp(rs.getInt("id"), rs.getString("nombre"),
+							rs.getString("descripcion")));
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -205,7 +210,8 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 				ps.setString(1, nombre);
 				rs = ps.executeQuery();
 				if (rs.next()) {
-					resultado = (new ListaRPDAOImp(rs.getInt("id"),rs.getString("nombre"),rs.getString("descripcion")));
+					resultado = (new ListaRPDAOImp(rs.getInt("id"), rs.getString("nombre"),
+							rs.getString("descripcion")));
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -213,5 +219,75 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 		}
 		return resultado;
 	}
+
+	@Override
+	public List<UsuariosDAOImp> mostrarUsuariosSubscritos() {
+		List<UsuariosDAOImp> resultado = new ArrayList<UsuariosDAOImp>();
+		con = Conexion.getConnection();
+		if(con!=null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARUSUARIOSSUBSCRITOS);
+				ps.setInt(1, this.id);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					resultado.add(new UsuariosDAOImp(rs.getString("nombre"),rs.getString("correo")));
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		return resultado;
+	}
+
+	@Override
+	public int contarUsuariosSubscritos() {
+		int resultado = 0;
+		con = Conexion.getConnection();
+		if(con!=null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARUSUARIOSSUBSCRITOS);
+				ps.setInt(1, this.id);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					resultado++;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		return resultado;
+	}
+
+	@Override
+	public List<CancionesDAOImp> mostrasCancionesDeLaLista() {
+		
+		
+		return null;
+		
+	}
+
+	@Override
+	public void añadirCancionesALaLista(ListaRP lrp, Canciones can) {
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(AÑADIRCANCIONESALALISTA);
+				ps.setInt(1, lrp.getId());
+				ps.setInt(2, can.getId());
+				ps.executeUpdate();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+	
+
+	
 
 }
