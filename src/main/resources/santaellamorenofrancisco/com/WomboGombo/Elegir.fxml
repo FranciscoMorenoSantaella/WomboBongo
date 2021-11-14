@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="santaellamorenofrancisco.com.WomboGombo.ElegirController">
+   <children>
+      <TextField fx:id="BuscarCancion" layoutX="438.0" layoutY="157.0" promptText="Busca una cancion" />
+      <Button layoutX="487.0" layoutY="317.0" mnemonicParsing="false" text="Buscar" />
+      <Button fx:id="listasB" layoutX="69.0" layoutY="517.0" mnemonicParsing="false" onAction="#switchToListas" text="Ir a listas de reproduccion" />
+      <Button fx:id="canAleB" layoutX="830.0" layoutY="517.0" mnemonicParsing="false" onAction="#switchToCancion" text="Cancion aleatoria" />
+   </children>
+</AnchorPane>

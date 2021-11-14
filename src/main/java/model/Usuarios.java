@@ -24,6 +24,14 @@ public class Usuarios {
 		this.nombre = nombre;
 		this.correo = correo;
 	}
+	
+	public Usuarios(String nombre,String contraseña, String correo) {
+		super();
+		this.nombre = nombre;
+		this.contraseña = contraseña;
+		this.correo = correo;
+	}
+
 
 
 	public Usuarios(String nombre, String contraseña, String correo, String foto) {
@@ -94,11 +102,11 @@ public class Usuarios {
 		this.foto = foto;
 	}
 
-	private String getContraseña() {
+	public String getContraseña() {
 		return contraseña;
 	}
 
-	private void setContraseña(String contraseña) {
+	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
 

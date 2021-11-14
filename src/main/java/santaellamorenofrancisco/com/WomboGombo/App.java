@@ -38,8 +38,8 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		scene = new Scene(loadFXML("Login"), 1025, 576);
-		stage.setTitle("Login");
+		scene = new Scene(loadFXML("Login2"), 1024, 576);
+		stage.setTitle("WomboBongo");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -54,31 +54,7 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
-		/*
-		 * ArtistasDAOImp ar = new ArtistasDAOImp();
-		 * 
-		 * ar = (ArtistasDAOImp) ar.mostrarPorNombre("adios"); System.out.println(ar);
-		 * 
-		 * GenerosDAOImp gen = new GenerosDAOImp(); gen = (GenerosDAOImp)
-		 * gen.mostrarPorNombre("traca"); System.out.println(gen);
-		 */
-		ArtistasDAOImp ar = new ArtistasDAOImp();
-		DiscosDAOImp disk = new DiscosDAOImp();
-		GenerosDAOImp gen = new GenerosDAOImp();
-		ar = (ArtistasDAOImp) ar.mostrarPorId(1);
-		disk = (DiscosDAOImp) disk.mostrarPorId(3);
-		gen = (GenerosDAOImp) gen.mostrarPorId(1);
-		CancionesDAOImp can = new CancionesDAOImp(2,"al filo", 1, 1, disk, gen);
-		UsuariosDAOImp us = new UsuariosDAOImp(2,"Francisco","Francisco","Francisco@gmail.com","foto");
-		List<Usuarios> uslist = new ArrayList<Usuarios>();
-		ListaRPDAOImp lrp = new ListaRPDAOImp(3,"aaaa","aaaa");
-		lrp.añadirCancionesALaLista(lrp, can);
-		
-
-		
-	
-		
-
+		UsuariosDAOImp us1 = new UsuariosDAOImp("pana","pana","panasea2");
 		launch();
 	}
 

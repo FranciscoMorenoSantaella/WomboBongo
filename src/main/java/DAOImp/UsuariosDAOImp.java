@@ -24,7 +24,7 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	private static final String MOSTRARMISLISTAS = "SELECT listarp.nombre FROM listarp,usuarios_listarp, usuarios WHERE usuarios.id = usuarios_listarp.id_usuario";
 	private static final String AÑADIRLISTASALUSUARIO = "INSERT INTO usuarios_listarp (id_usuario,id_listarp) VALUES (?,?)";
 	private static final String BORRARLISTASALUSUARIO = "DELETE FROM usuarios_listarp WHERE id=?";
-
+	private static final String ELUSUARIOEXISTE = "SELECT nombre,contraseña FROM usuarios WHERE nombre=? AND contraseña=?";
 	private List<ListaRP> lrp;
 	private Connection con;
 	private boolean persisted = false;
@@ -35,6 +35,10 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	
 	public UsuariosDAOImp(String nombre, String correo) {
 		super(nombre, correo);
+	}
+	
+	public UsuariosDAOImp(String nombre, String contraseña, String correo) {
+		super(nombre, contraseña, correo);
 	}
 
 	public UsuariosDAOImp(String nombre, String contraseña, String correo, String foto) {
@@ -84,6 +88,8 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 			}
 		}
 	}
+
+	
 
 	@Override
 	public void editar() {
@@ -261,6 +267,36 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Boolean UsuarioExiste(String nombre, String contraseña) {
+		Boolean flag = false;
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(ELUSUARIOEXISTE);
+				ps.setString(1, nombre);
+				ps.setString(2, contraseña);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					return flag = true;
+				}
+		
+			} catch (Exception e) {
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return flag;
+	
 	}
 
 }

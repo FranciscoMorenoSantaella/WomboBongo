@@ -22,6 +22,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 	private static final String EDITARCANCIONES = "UPDATE canciones set nombre=?, duracion=?, nReproducciones=?, id_discos=?,id_generos=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones WHERE canciones.id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones WHERE canciones.nombre=?";
+	private static final String CANCIONALEATORIA = " SELECT * FROM canciones ORDER BY rand() LIMIT 1";
 	private Connection con;
 	private boolean persisted = false;
 
@@ -222,6 +223,42 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
 					resultado =(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+							rs.getInt("nReproducciones"), disk1, gen1));
+
+				}
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return resultado;
+	}
+
+	@Override
+	public CancionesDAOImp cancionAleatoria() {
+		CancionesDAOImp resultado = new CancionesDAOImp();
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+		
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(CANCIONALEATORIA);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					DiscosDAOImp disk = new DiscosDAOImp();
+					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
+					GenerosDAOImp gen = new GenerosDAOImp();
+					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
+					resultado =(new CancionesDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
 							rs.getInt("nReproducciones"), disk1, gen1));
 
 				}
