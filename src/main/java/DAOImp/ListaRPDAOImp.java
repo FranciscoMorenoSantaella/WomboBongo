@@ -24,7 +24,7 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 	private static final String BORRARLISTARPNOMBRE = "DELETE FROM listarp WHERE listarp.nombre = ?";
 	private static final String EDITARLISTARP = "UPDATE listarp set nombre=?,descripcion=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre, descripcion FROM listarp WHERE id=?";
-	private static final String MOSTRARPORNOMBRE = "SELECT listarp.id,listarp.nombre,listarp.descripcion FROM listarp, usuarios_listarp, usuarios WHERE  usuarios_listarp.id_usuario = usuarios.id AND listarp.id = usuarios_listarp.id_listarp   AND listarp.nombre=?";
+	private static final String MOSTRARPORNOMBRE = "SELECT listarp.id,listarp.nombre,listarp.descripcion FROM listarp WHERE listarp.nombre=?";
 	private static final String MOSTRARPORNOMBRELISTASDEESTEUSUARIO = "SELECT listarp.id,listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp,usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios_listarp.id_usuario = usuarios.id ";
 	private static final String MOSTRARCANCIONESDELALISTA = "SELECT canciones.nombre FROM canciones,canciones_listarp WHERE canciones.id = canciones_listarp.id_canciones AND canciones.id = ?";
 	private static final String MOSTRARUSUARIOSSUBSCRITOS = "SELECT usuarios.nombre,usuarios.correo FROM listarp, usuarios_listarp, usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND listarp.id = ?";

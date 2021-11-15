@@ -21,7 +21,7 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	private static final String MOSTRARPORID = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE nombre=?";
 	private static final String MOSTRARPORNOMBRELISTASDEESTEUSUARIO = "SELECT listarp.id,listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp,usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios_listarp.id_usuario = usuarios.id AND listarp.nombre = ? ";
-	private static final String MOSTRARMISLISTAS = "SELECT listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp, usuarios WHERE usuarios.id = 2 AND listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND usuarios.id = ?";
+	private static final String MOSTRARMISLISTAS = "SELECT listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp, usuarios WHERE usuarios.id = usuarios_listarp.id_usuario AND listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND usuarios.id =?";
 	private static final String AÑADIRLISTASALUSUARIO = "INSERT INTO usuarios_listarp (id_usuario,id_listarp) VALUES (?,?)";
 	private static final String BORRARLISTASALUSUARIO = "DELETE FROM usuarios_listarp WHERE usuarios_listarp.id_listarp = ?";
 	private static final String ELUSUARIOEXISTE = "SELECT nombre FROM usuarios WHERE nombre=? and contraseña = ?";

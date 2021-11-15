@@ -6,7 +6,7 @@ public class Canciones {
 	protected int id;
 	protected String nombre;
 	protected int duracion;
-	protected int nReproducciones;
+	protected int reproducciones;
 	protected Discos disk;
 	protected Generos gen;
 
@@ -14,23 +14,23 @@ public class Canciones {
 		id = -1;
 		nombre = "noencontrado";
 		duracion = 0;
-		nReproducciones = 0;
+		reproducciones = 0;
 
 	}
 
-	public Canciones(String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
+	public Canciones(String nombre, int duracion, int reproducciones, Discos disk, Generos gen) {
 		this.nombre = nombre;
 		this.duracion = duracion;
-		this.nReproducciones = nReproducciones;
+		this.reproducciones = reproducciones;
 		this.disk = disk;
 		this.gen = gen;
 	}
 
-	public Canciones(int id, String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
+	public Canciones(int id, String nombre, int duracion, int reproducciones, Discos disk, Generos gen) {
 		this.id = id;
 		this.nombre = nombre;
 		this.duracion = duracion;
-		this.nReproducciones = nReproducciones;
+		this.reproducciones = reproducciones;
 		this.disk = disk;
 		this.gen = gen;
 	}
@@ -60,11 +60,11 @@ public class Canciones {
 	}
 
 	public int getnReproducciones() {
-		return nReproducciones;
+		return reproducciones;
 	}
 
 	public void setnReproducciones(int nReproducciones) {
-		this.nReproducciones = nReproducciones;
+		this.reproducciones = nReproducciones;
 	}
 
 	public Discos getDisk() {
@@ -102,8 +102,8 @@ public class Canciones {
 
 	@Override
 	public String toString() {
-		return "Canciones [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + ", nReproducciones="
-				+ nReproducciones + ", disk=" + disk + ", gen=" + gen + "]";
+		return "Canciones [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + ", reproducciones="
+				+ reproducciones + ", disk=" + disk + ", gen=" + gen + "]";
 	}
 	
 

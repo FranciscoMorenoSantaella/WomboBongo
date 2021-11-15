@@ -23,6 +23,9 @@ public class ListasController {
 	private TextField nombre;
 
 	@FXML
+	private TextField sus;
+
+	@FXML
 	private TextField descripcion;
 
 	@FXML
@@ -64,7 +67,7 @@ public class ListasController {
 	@FXML
 	public void initialize() {
 
-		System.out.println(lrp2);
+		System.out.println(us1.mostrarMisListas());
 
 		if (lrp2 != null) {
 
@@ -98,6 +101,7 @@ public class ListasController {
 			us1.añadirlistadelusuario(us1, lrp);
 			lrp2.add(lrp);
 			tv1.setItems(lrp2);
+			tv2.setItems(lrp2);
 			nombre.clear();
 			descripcion.clear();
 
@@ -105,8 +109,28 @@ public class ListasController {
 
 	}
 
-	public void borrarLista() {
+	public void subscribirme() {
+		boolean flag = false;
+		us1.setLrp(lrp2);
+		ListaRPDAOImp lrp = new ListaRPDAOImp();
+		for (int i = 0; i < us1.mostrarMisListas().size(); i++) {
+			if (us1.mostrarMisListas().get(i).getNombre() == sus.getText()) {
+				flag = true;
+				System.out.println("sin sentido");
+			}
+		}
+		System.out.println(flag);
+		if (flag == false) {
+			lrp = (ListaRPDAOImp) lrp.mostrarPorNombre(sus.getText());
+			us1.añadirlistadelusuario(us1, lrp);
+			lrp2.add(lrp);
+			tv1.setItems(lrp2);
+			sus.clear();
+		} else {
+		}
+	}
 
+	public void borrarLista() {
 		if (nombre.getText() == "") {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText(null);

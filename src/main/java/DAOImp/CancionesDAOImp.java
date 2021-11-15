@@ -16,12 +16,12 @@ import model.Discos;
 import model.Generos;
 
 public class CancionesDAOImp extends Canciones implements CancionesDAO {
-	private static final String MOSTRARTODOS = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones";
-	private static final String AÑADIRCANCIONES = "INSERT INTO canciones (nombre,duracion,nReproducciones,id_discos,id_generos,id) VALUES (?,?,?,?,?,?)";
+	private static final String MOSTRARTODOS = "SELECT id,nombre,duracion,reproducciones,id_discos,id_generos FROM canciones";
+	private static final String AÑADIRCANCIONES = "INSERT INTO canciones (nombre,duracion,reproducciones,id_discos,id_generos,id) VALUES (?,?,?,?,?,?)";
 	private static final String BORRARCANCIONES = "DELETE FROM canciones WHERE canciones.id = ?";
-	private static final String EDITARCANCIONES = "UPDATE canciones set nombre=?, duracion=?, nReproducciones=?, id_discos=?,id_generos=? WHERE id=?";
-	private static final String MOSTRARPORID = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones WHERE canciones.id=?";
-	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,duracion,nReproducciones,id_discos,id_generos FROM canciones WHERE canciones.nombre=?";
+	private static final String EDITARCANCIONES = "UPDATE canciones set nombre=?, duracion=?, reproducciones=?, id_discos=?,id_generos=? WHERE id=?";
+	private static final String MOSTRARPORID = "SELECT id,nombre,duracion,reproducciones,id_discos,id_generos FROM canciones WHERE canciones.id=?";
+	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,duracion,reproducciones,id_discos,id_generos FROM canciones WHERE canciones.nombre=?";
 	private static final String CANCIONALEATORIA = " SELECT * FROM canciones ORDER BY rand() LIMIT 1";
 	private Connection con;
 	private boolean persisted = false;
@@ -30,12 +30,12 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 		super();
 	}
 
-	public CancionesDAOImp(String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
-		super(nombre, duracion, nReproducciones, disk, gen);
+	public CancionesDAOImp(String nombre, int duracion, int reproducciones, Discos disk, Generos gen) {
+		super(nombre, duracion, reproducciones, disk, gen);
 	}
 
-	public CancionesDAOImp(int id, String nombre, int duracion, int nReproducciones, Discos disk, Generos gen) {
-		super(id, nombre, duracion, nReproducciones, disk, gen);
+	public CancionesDAOImp(int id, String nombre, int duracion, int reproducciones, Discos disk, Generos gen) {
+		super(id, nombre, duracion, reproducciones, disk, gen);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 				ps = con.prepareStatement(AÑADIRCANCIONES, Statement.RETURN_GENERATED_KEYS);
 				ps.setString(1, this.nombre);
 				ps.setInt(2, this.duracion); // Para convertir LocalDate al formato DATE
-				ps.setInt(3, this.nReproducciones);
+				ps.setInt(3, this.reproducciones);
 				ps.setObject(4, this.disk.getId());
 				ps.setObject(5, this.gen.getId());
 				ps.setInt(6, this.id);
@@ -84,7 +84,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 				ps = con.prepareStatement(EDITARCANCIONES);
 				ps.setString(1, this.nombre);
 				ps.setInt(2, this.duracion);
-				ps.setInt(3, this.nReproducciones);
+				ps.setInt(3, this.reproducciones);
 				ps.setObject(4, this.disk.getId());
 				ps.setObject(5, this.gen.getId());
 				ps.setInt(6, this.id);
@@ -149,7 +149,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
 					resultado.add(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
-							rs.getInt("nReproducciones"), disk1, gen1));
+							rs.getInt("reproducciones"), disk1, gen1));
 
 				}
 
@@ -186,7 +186,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
 					resultado =(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
-							rs.getInt("nReproducciones"), disk1, gen1));
+							rs.getInt("reproducciones"), disk1, gen1));
 
 				}
 
@@ -206,8 +206,8 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 	}
 
 	@Override
-	public Canciones mostrarPorNombre(String nombre) {
-		Canciones resultado = new CancionesDAOImp();
+	public CancionesDAOImp mostrarPorNombre(String nombre) {
+		CancionesDAOImp resultado = new CancionesDAOImp();
 		con = Conexion.getConnection();
 		if (con != null) {
 			PreparedStatement ps = null;
@@ -222,8 +222,8 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
-					resultado =(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
-							rs.getInt("nReproducciones"), disk1, gen1));
+					resultado =(new CancionesDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+							rs.getInt("reproducciones"), disk1, gen1));
 
 				}
 
@@ -259,7 +259,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
 					resultado =(new CancionesDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
-							rs.getInt("nReproducciones"), disk1, gen1));
+							rs.getInt("reproducciones"), disk1, gen1));
 
 				}
 
