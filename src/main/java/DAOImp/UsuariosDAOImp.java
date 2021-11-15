@@ -20,6 +20,7 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	private static final String EDITARUSUARIOS = "UPDATE usuarios set nombre=?, contraseña=?, correo=?,foto=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE nombre=?";
+	private static final String MOSTRARPORNOMBRELISTASDEESTEUSUARIO = "SELECT listarp.id,listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp,usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios_listarp.id_usuario = usuarios.id AND listarp.nombre = ? ";
 	private static final String MOSTRARMISLISTAS = "SELECT listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp, usuarios WHERE usuarios.id = 2 AND listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND usuarios.id = ?";
 	private static final String AÑADIRLISTASALUSUARIO = "INSERT INTO usuarios_listarp (id_usuario,id_listarp) VALUES (?,?)";
 	private static final String BORRARLISTASALUSUARIO = "DELETE FROM usuarios_listarp WHERE usuarios_listarp.id_listarp = ?";
@@ -354,6 +355,36 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 		}
 		return flag;
 
+	}
+
+	@Override
+	public ListaRPDAOImp mostrarMiLista(String nombre) {
+		ListaRPDAOImp resultado =new ListaRPDAOImp();
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARPORNOMBRELISTASDEESTEUSUARIO);
+				ps.setString(1, nombre);
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					resultado = (new ListaRPDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion")));
+				}
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return resultado;
 	}
 
 }

@@ -49,8 +49,9 @@
                         </AnchorPane>
                         <TableView fx:id="tv2" layoutX="303.0" prefHeight="546.0" prefWidth="723.0">
                           <columns>
-                            <TableColumn fx:id="t3" prefWidth="362.0" text="Listas" />
-                            <TableColumn fx:id="t4" prefWidth="359.0" text="Descripcion" />
+                            <TableColumn fx:id="t3" prefWidth="223.0" text="Listas" />
+                            <TableColumn fx:id="t4" prefWidth="240.0" text="Descripcion" />
+                              <TableColumn prefWidth="259.0" text="Autor de la lista" />
                           </columns>
                         </TableView>
                      </children>

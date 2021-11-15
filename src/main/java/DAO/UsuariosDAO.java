@@ -11,5 +11,6 @@ public interface UsuariosDAO extends IDAO<Usuarios>{
 	void borrarlistadelusuario(ListaRP lrp);
 	Boolean UsuarioExiste(String nombre, String contraseña);
 	Boolean UsuarioExiste(String nombre);
+	ListaRPDAOImp mostrarMiLista(String nombre);
 	List<ListaRPDAOImp> mostrarMisListas();
 }

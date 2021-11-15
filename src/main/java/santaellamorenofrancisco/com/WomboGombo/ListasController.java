@@ -2,7 +2,6 @@ package santaellamorenofrancisco.com.WomboGombo;
 
 import java.util.List;
 
-
 import DAOImp.ListaRPDAOImp;
 import DAOImp.UsuariosDAOImp;
 import javafx.collections.FXCollections;
@@ -16,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.ListaRP;
 import model.UserHolder;
+import model.Usuarios;
 
 public class ListasController {
 
@@ -42,6 +42,12 @@ public class ListasController {
 
 	@FXML
 	private TableColumn t4;
+
+	@FXML
+	private TableColumn t5;
+
+	@FXML
+	private TableColumn t6;
 
 	@FXML
 	private Button crearB;
@@ -81,7 +87,7 @@ public class ListasController {
 		ListaRPDAOImp lrp = new ListaRPDAOImp();
 		lrp.setNombre(nombre.getText());
 		lrp.setDescripcion(descripcion.getText());
-		if (nombre.getText()=="" || descripcion.getText()=="") {
+		if (nombre.getText() == "" || descripcion.getText() == "") {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText(null);
 			alert.setTitle("Error");
@@ -92,13 +98,15 @@ public class ListasController {
 			us1.añadirlistadelusuario(us1, lrp);
 			lrp2.add(lrp);
 			tv1.setItems(lrp2);
+			nombre.clear();
+			descripcion.clear();
 
 		}
 
 	}
-	
+
 	public void borrarLista() {
-	
+
 		if (nombre.getText() == "") {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText(null);
@@ -108,15 +116,17 @@ public class ListasController {
 		} else {
 			ListaRPDAOImp lrp = new ListaRPDAOImp();
 			System.out.println(t1.getText());
-			
-			
-			lrp = (ListaRPDAOImp) lrp.mostrarPorNombre(nombre.getText());
+
+			lrp = us1.mostrarMiLista(nombre.getText());
 			System.out.println(lrp);
 			us1.borrarlistadelusuario(lrp);
-			
+			lrp2.remove(lrp);
+			tv2.setItems(lrp2);
+			nombre.clear();
+			descripcion.clear();
+
 		}
 
 	}
-
 
 }
