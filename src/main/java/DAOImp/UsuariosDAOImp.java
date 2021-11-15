@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import DAO.UsuariosDAO;
 import Utils.Conexion;
 import model.Artistas;
@@ -21,10 +20,11 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	private static final String EDITARUSUARIOS = "UPDATE usuarios set nombre=?, contraseña=?, correo=?,foto=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,contraseña,correo,foto FROM usuarios WHERE nombre=?";
-	private static final String MOSTRARMISLISTAS = "SELECT listarp.nombre FROM listarp,usuarios_listarp, usuarios WHERE usuarios.id = usuarios_listarp.id_usuario";
+	private static final String MOSTRARMISLISTAS = "SELECT listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp, usuarios WHERE usuarios.id = 2 AND listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND usuarios.id = ?";
 	private static final String AÑADIRLISTASALUSUARIO = "INSERT INTO usuarios_listarp (id_usuario,id_listarp) VALUES (?,?)";
-	private static final String BORRARLISTASALUSUARIO = "DELETE FROM usuarios_listarp WHERE id=?";
-	private static final String ELUSUARIOEXISTE = "SELECT nombre,contraseña FROM usuarios WHERE nombre=? AND contraseña=?";
+	private static final String BORRARLISTASALUSUARIO = "DELETE FROM usuarios_listarp WHERE usuarios_listarp.id_listarp = ?";
+	private static final String ELUSUARIOEXISTE = "SELECT nombre FROM usuarios WHERE nombre=? and contraseña = ?";
+	private static final String ELUSUARIOEXISTESOLONOMBRE = "SELECT nombre FROM usuarios WHERE nombre=?";
 	private List<ListaRP> lrp;
 	private Connection con;
 	private boolean persisted = false;
@@ -32,11 +32,11 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 	public UsuariosDAOImp() {
 		super();
 	}
-	
+
 	public UsuariosDAOImp(String nombre, String correo) {
 		super(nombre, correo);
 	}
-	
+
 	public UsuariosDAOImp(String nombre, String contraseña, String correo) {
 		super(nombre, contraseña, correo);
 	}
@@ -89,8 +89,6 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 		}
 	}
 
-	
-
 	@Override
 	public void editar() {
 		con = Conexion.getConnection();
@@ -125,7 +123,6 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 		con = Conexion.getConnection();
 
 		if (con != null) {
-
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try {
@@ -251,11 +248,11 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(BORRARLISTASALUSUARIO);
-				ps.setInt(1,lrp.getId());
+				ps.setInt(1, lrp.getId());
 				ps.executeUpdate();
 				this.id = -1;
 				ps.executeUpdate();
-
+				System.out.println("borro");
 			} catch (Exception e) {
 				// TODO: handle exception
 			} finally {
@@ -281,10 +278,11 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 				ps.setString(1, nombre);
 				ps.setString(2, contraseña);
 				rs = ps.executeQuery();
-				if(rs.next()) {
-					return flag = true;
+				if (rs.next()) {
+					System.out.println("entro");
+					flag = true;
 				}
-		
+
 			} catch (Exception e) {
 			} finally {
 				try {
@@ -296,7 +294,66 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 			}
 		}
 		return flag;
-	
+
+	}
+
+	@Override
+	public List<ListaRPDAOImp> mostrarMisListas() {
+		List<ListaRPDAOImp> resultado = new ArrayList<ListaRPDAOImp>();
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARMISLISTAS);
+				ps.setInt(1, this.id);
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					resultado.add(new ListaRPDAOImp(rs.getString("nombre"), rs.getString("descripcion")));
+				}
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return resultado;
+	}
+
+	@Override
+	public Boolean UsuarioExiste(String nombre) {
+		Boolean flag = false;
+		con = Conexion.getConnection();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(ELUSUARIOEXISTESOLONOMBRE);
+				ps.setString(1, nombre);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					flag = true;
+				}
+
+			} catch (Exception e) {
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return flag;
+
 	}
 
 }

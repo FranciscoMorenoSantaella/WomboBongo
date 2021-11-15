@@ -7,8 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="santaellamorenofrancisco.com.WomboGombo.ListasController">
    <children>
       <TabPane layoutX="-1.0" prefHeight="576.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -18,15 +19,18 @@
                      <children>
                         <AnchorPane prefHeight="550.0" prefWidth="302.0">
                            <children>
-                              <Button layoutX="71.0" layoutY="483.0" mnemonicParsing="false" text="Crear" />
-                              <Button layoutX="188.0" layoutY="483.0" mnemonicParsing="false" text="Borrar" />
-                              <TextField layoutX="77.0" layoutY="151.0" promptText="Nombre de la lista" />
+                              <Button fx:id="crearB" layoutX="71.0" layoutY="483.0" mnemonicParsing="false" onAction="#crearListas" text="Crear" />
+                              <Button fx:id="borrarB" layoutX="188.0" layoutY="483.0" mnemonicParsing="false" onAction="#borrarLista" text="Borrar" />
+                              <TextField fx:id="nombre" layoutX="77.0" layoutY="151.0" promptText="Nombre de la lista" />
+                              <Text layoutX="128.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre " />
+                              <Text layoutX="120.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripcion" />
+                              <TextField fx:id="descripcion" layoutX="81.0" layoutY="260.0" promptText="Descripcion de la lista" />
                            </children>
                         </AnchorPane>
-                        <TableView layoutX="302.0" layoutY="1.0" prefHeight="549.0" prefWidth="724.0">
+                        <TableView fx:id="tv1" layoutX="302.0" layoutY="1.0" prefHeight="549.0" prefWidth="724.0">
                           <columns>
-                            <TableColumn prefWidth="352.0" text="Mis listas" />
-                            <TableColumn prefWidth="371.0" text="Numero de canciones" />
+                            <TableColumn fx:id="t1" prefWidth="352.0" text="Mis listas" />
+                            <TableColumn fx:id="t2" prefWidth="371.0" text="Descripcion" />
                           </columns>
                         </TableView>
                      </children>
@@ -43,10 +47,10 @@
                               <TextField layoutX="77.0" layoutY="77.0" promptText="Subscribirme a una lista" />
                            </children>
                         </AnchorPane>
-                        <TableView layoutX="303.0" prefHeight="546.0" prefWidth="723.0">
+                        <TableView fx:id="tv2" layoutX="303.0" prefHeight="546.0" prefWidth="723.0">
                           <columns>
-                            <TableColumn prefWidth="362.0" text="Listas" />
-                            <TableColumn prefWidth="359.0" text="Numero de canciones" />
+                            <TableColumn fx:id="t3" prefWidth="362.0" text="Listas" />
+                            <TableColumn fx:id="t4" prefWidth="359.0" text="Descripcion" />
                           </columns>
                         </TableView>
                      </children>

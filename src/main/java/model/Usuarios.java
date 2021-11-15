@@ -30,6 +30,7 @@ public class Usuarios {
 		this.nombre = nombre;
 		this.contraseña = contraseña;
 		this.correo = correo;
+		this.foto = "pordefecto";
 	}
 
 

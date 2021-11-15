@@ -20,10 +20,12 @@ import model.Usuarios;
 public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 	private static final String MOSTRARTODOS = "SELECT id,nombre,descripcion FROM listarp";
 	private static final String AÑADIRLISTARP = "INSERT INTO listarp (nombre,descripcion) VALUES (?,?)";
-	private static final String BORRARLISTARP = "DELETE FROM listarp WHERE listarp.id = ?";
+	private static final String BORRARLISTARPID = "DELETE FROM listarp WHERE listarp.id = ?";
+	private static final String BORRARLISTARPNOMBRE = "DELETE FROM listarp WHERE listarp.nombre = ?";
 	private static final String EDITARLISTARP = "UPDATE listarp set nombre=?,descripcion=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre, descripcion FROM listarp WHERE id=?";
 	private static final String MOSTRARPORNOMBRE = "SELECT id,nombre,descripcion FROM listarp WHERE nombre=?";
+	private static final String MOSTRARPORNOMBRELISTASDEESTEUSUARIO = "SELECT listarp.id,listarp.nombre,listarp.descripcion FROM listarp,usuarios_listarp,usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios_listarp.id_usuario = usuarios.id ";
 	private static final String MOSTRARCANCIONESDELALISTA = "SELECT canciones.nombre FROM canciones,canciones_listarp WHERE canciones.id = canciones_listarp.id_canciones AND canciones.id = ?";
 	private static final String MOSTRARUSUARIOSSUBSCRITOS = "SELECT usuarios.nombre,usuarios.correo FROM listarp, usuarios_listarp, usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND listarp.id = ?";
 	private static final String CUENTAUSUARIOSSUBSCRITOS = "SELECT COUNT(usuarios.nombre) FROM listarp, usuarios_listarp, usuarios WHERE listarp.id = usuarios_listarp.id_listarp AND usuarios.id = usuarios_listarp.id_usuario AND listarp.id = ?";
@@ -70,9 +72,8 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(AÑADIRLISTARP, Statement.RETURN_GENERATED_KEYS);
-				ps.setInt(1, this.id);
-				ps.setString(2, this.nombre);
-				ps.setString(3, this.descripcion);
+				ps.setString(1, this.nombre);
+				ps.setString(2, this.descripcion);
 				ps.executeUpdate();
 				rs = ps.getGeneratedKeys();
 				if (rs.next()) {
@@ -128,8 +129,8 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try {
-				ps = con.prepareStatement(BORRARLISTARP);
-				ps.setInt(1, this.id);
+				ps = con.prepareStatement(BORRARLISTARPNOMBRE);
+				ps.setString(1, this.nombre);
 				ps.executeUpdate();
 				this.id = -1;
 
@@ -224,15 +225,15 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 	public List<UsuariosDAOImp> mostrarUsuariosSubscritos() {
 		List<UsuariosDAOImp> resultado = new ArrayList<UsuariosDAOImp>();
 		con = Conexion.getConnection();
-		if(con!=null) {
+		if (con != null) {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(MOSTRARUSUARIOSSUBSCRITOS);
 				ps.setInt(1, this.id);
 				rs = ps.executeQuery();
-				while(rs.next()){
-					resultado.add(new UsuariosDAOImp(rs.getString("nombre"),rs.getString("correo")));
+				while (rs.next()) {
+					resultado.add(new UsuariosDAOImp(rs.getString("nombre"), rs.getString("correo")));
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -245,14 +246,14 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 	public int contarUsuariosSubscritos() {
 		int resultado = 0;
 		con = Conexion.getConnection();
-		if(con!=null) {
+		if (con != null) {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(MOSTRARUSUARIOSSUBSCRITOS);
 				ps.setInt(1, this.id);
 				rs = ps.executeQuery();
-				while(rs.next()){
+				while (rs.next()) {
 					resultado++;
 				}
 			} catch (Exception e) {
@@ -264,10 +265,9 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 
 	@Override
 	public List<CancionesDAOImp> mostrasCancionesDeLaLista() {
-		
-		
+
 		return null;
-		
+
 	}
 
 	@Override
@@ -286,8 +286,5 @@ public class ListaRPDAOImp extends ListaRP implements ListaRPDAO {
 			}
 		}
 	}
-	
-
-	
 
 }
