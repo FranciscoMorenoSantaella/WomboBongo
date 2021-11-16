@@ -20,42 +20,23 @@ import model.ListaRP;
 public class ElegirController {
 
 	@FXML
-	private TextField BuscarCancion;
-
-	@FXML
 	private TableView tv1;
 
 	@FXML
 	private TableColumn t1;
 	@FXML
-	private TableColumn <CancionesDAOImp,Integer> t2;
+	private TableColumn<CancionesDAOImp, Integer> t2;
 	@FXML
-	private ImageView canAleB;
+	private ImageView perfilB;
 	@FXML
 	private ImageView listasB;
-	
-	@FXML
-	private Button perfilB;
-	
 
-	CancionesDAOImp can = new CancionesDAOImp();
-	ObservableList<Canciones> canlist = FXCollections.observableArrayList(can.mostrarTodos());
-	
+	@FXML
+	private ImageView cancionesB;
 
 	@FXML
 	public void initialize() {
 
-	
-		t1.setCellValueFactory(new PropertyValueFactory<CancionesDAOImp, String>("nombre"));
-		t2.setCellValueFactory(new PropertyValueFactory<CancionesDAOImp, Integer>("reproducciones"));
-		System.out.println(canlist);
-		tv1.setItems(canlist);
-	}
-
-	@FXML
-	private void Buscar() {
-		can = can.mostrarPorNombre(BuscarCancion.getText());
-		System.out.println(can);
 	}
 
 	@FXML
@@ -77,9 +58,9 @@ public class ElegirController {
 	private void switchToListas() throws IOException {
 		App.setRoot("Listas de reproduccion");
 	}
-	
+
 	@FXML
-	private void switchToPerfil() throws IOException{
+	private void switchToPerfil() throws IOException {
 		App.setRoot("Perfil");
 	}
 

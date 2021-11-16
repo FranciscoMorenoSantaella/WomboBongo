@@ -280,7 +280,6 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 				ps.setString(2, contraseña);
 				rs = ps.executeQuery();
 				if (rs.next()) {
-					System.out.println("entro");
 					flag = true;
 				}
 

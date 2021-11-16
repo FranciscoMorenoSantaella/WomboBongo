@@ -18,6 +18,7 @@ import model.Generos;
 public class CancionesDAOImp extends Canciones implements CancionesDAO {
 	private static final String MOSTRARTODOS = "SELECT id,nombre,duracion,reproducciones,id_discos,id_generos FROM canciones";
 	private static final String AÑADIRCANCIONES = "INSERT INTO canciones (nombre,duracion,reproducciones,id_discos,id_generos,id) VALUES (?,?,?,?,?,?)";
+	private static final String AÑADIRCANCIONESSINDISCO = "INSERT INTO canciones (nombre,duracion,reproducciones,id_generos,id) VALUES (?,?,?,?,?)";
 	private static final String BORRARCANCIONES = "DELETE FROM canciones WHERE canciones.id = ?";
 	private static final String EDITARCANCIONES = "UPDATE canciones set nombre=?, duracion=?, reproducciones=?, id_discos=?,id_generos=? WHERE id=?";
 	private static final String MOSTRARPORID = "SELECT id,nombre,duracion,reproducciones,id_discos,id_generos FROM canciones WHERE canciones.id=?";
@@ -28,6 +29,10 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 
 	public CancionesDAOImp() {
 		super();
+	}
+	
+	public CancionesDAOImp(String nombre, int duracion, Generos gen) {
+		super(nombre, duracion, gen);
 	}
 
 	public CancionesDAOImp(String nombre, int duracion, int reproducciones, Discos disk, Generos gen) {
@@ -48,11 +53,17 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 			try {
 				ps = con.prepareStatement(AÑADIRCANCIONES, Statement.RETURN_GENERATED_KEYS);
 				ps.setString(1, this.nombre);
+				System.out.println(this.nombre);
 				ps.setInt(2, this.duracion); // Para convertir LocalDate al formato DATE
+				System.out.println(this.duracion);
 				ps.setInt(3, this.reproducciones);
+				System.out.println(this.reproducciones);
 				ps.setObject(4, this.disk.getId());
+				System.out.println(this.disk.getId());
 				ps.setObject(5, this.gen.getId());
+				System.out.println(this.gen.getId());
 				ps.setInt(6, this.id);
+				System.out.println(this.id);
 				ps.executeUpdate();
 				rs = ps.getGeneratedKeys();
 				if (rs.next()) {
@@ -72,6 +83,7 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 		}
 
 	}
+	
 
 	@Override
 	public void editar() {
@@ -277,6 +289,8 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 		}
 		return resultado;
 	}
+
+
 
 
 }

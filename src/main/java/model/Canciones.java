@@ -17,6 +17,15 @@ public class Canciones {
 		reproducciones = 0;
 
 	}
+	
+	public Canciones(String nombre, int duracion, Generos gen) {
+		this.nombre = nombre;
+		this.duracion = duracion;
+		this.reproducciones = reproducciones;
+		this.disk = disk;
+		this.gen = gen;
+	}
+
 
 	public Canciones(String nombre, int duracion, int reproducciones, Discos disk, Generos gen) {
 		this.nombre = nombre;

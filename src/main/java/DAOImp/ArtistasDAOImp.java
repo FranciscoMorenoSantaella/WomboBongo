@@ -12,6 +12,9 @@ import DAO.ArtistasDAO;
 import Utils.Conexion;
 import model.Artistas;
 
+/**
+ * En esta clase 
+ */
 public class ArtistasDAOImp extends Artistas implements ArtistasDAO {
 
 	private static final String MOSTRARTODOS = "SELECT id,nombre,nacionalidad,foto FROM artistas";
