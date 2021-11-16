@@ -36,7 +36,7 @@
                   <Image url="@imagenes/Iconos/next.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="90.0" fitWidth="81.0" layoutX="410.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sum" fitHeight="90.0" fitWidth="81.0" layoutX="410.0" layoutY="179.0" onMouseClicked="#sumarReproduccion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/Iconos/play.png" />
                </image>

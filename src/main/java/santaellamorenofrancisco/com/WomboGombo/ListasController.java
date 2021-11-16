@@ -1,5 +1,6 @@
 package santaellamorenofrancisco.com.WomboGombo;
 
+import java.io.IOException;
 import java.util.List;
 
 import DAOImp.ListaRPDAOImp;
@@ -18,6 +19,12 @@ import model.UserHolder;
 import model.Usuarios;
 
 public class ListasController {
+	
+	@FXML
+	private Button volver1;
+	
+	@FXML
+	private Button volver2;
 
 	@FXML
 	private TextField nombre;
@@ -72,7 +79,7 @@ public class ListasController {
 		if (lrp2 != null) {
 
 			t1.setCellValueFactory(new PropertyValueFactory<ListaRP, String>("nombre"));
-			t2.setCellValueFactory(new PropertyValueFactory<ListaRP, String>("Descripcion"));
+			t2.setCellValueFactory(new PropertyValueFactory<ListaRP, Integer>("Descripcion"));
 			ObservableList<ListaRP> olrp2 = FXCollections.observableArrayList(lrp2);
 			tv1.setItems(olrp2);
 		}
@@ -110,23 +117,31 @@ public class ListasController {
 	}
 
 	public void subscribirme() {
-		boolean flag = false;
-		us1.setLrp(lrp2);
-		ListaRPDAOImp lrp = new ListaRPDAOImp();
-		for (int i = 0; i < us1.mostrarMisListas().size(); i++) {
-			if (us1.mostrarMisListas().get(i).getNombre() == sus.getText()) {
-				flag = true;
-				System.out.println("sin sentido");
-			}
-		}
-		System.out.println(flag);
-		if (flag == false) {
-			lrp = (ListaRPDAOImp) lrp.mostrarPorNombre(sus.getText());
-			us1.añadirlistadelusuario(us1, lrp);
-			lrp2.add(lrp);
-			tv1.setItems(lrp2);
-			sus.clear();
+
+		if (tv2.getSelectionModel().getSelectedItem() != null && tv2.getSelectionModel().getSelectedItem().getNombre()
+				.equals(us1.mostrarMiLista(sus.getText()).getNombre())) {
+			System.out.println("Error");
+
 		} else {
+			ListaRPDAOImp lrp4 = new ListaRPDAOImp();
+			ListaRPDAOImp lrp3 = (ListaRPDAOImp) lrp4.mostrarPorId(tv2.getSelectionModel().getSelectedItem().getId());
+			us1.añadirlistadelusuario(us1, lrp3);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText(null);
+			alert.setTitle("Info");
+			alert.setContentText("Te has subscrito correctamente a la lista: "
+					+ tv2.getSelectionModel().getSelectedItem().getNombre());
+			alert.showAndWait();
+			lrp2.add(lrp3);
+			tv1.setItems(lrp2);
+		}
+
+	}
+
+	@FXML
+	public void seleccionar() {
+		if (tv2.getSelectionModel().getSelectedItem() != null) {
+			sus.setText(tv2.getSelectionModel().getSelectedItem().getNombre());
 		}
 	}
 
@@ -151,6 +166,11 @@ public class ListasController {
 
 		}
 
+	}
+	
+	@FXML
+	public void volver() throws IOException {
+		App.setRoot("Elegir");
 	}
 
 }

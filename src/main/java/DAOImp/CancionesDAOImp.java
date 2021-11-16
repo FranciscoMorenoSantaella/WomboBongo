@@ -174,18 +174,18 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 		con = Conexion.getConnection();
 		if (con != null) {
 			PreparedStatement ps = null;
-		
+
 			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(MOSTRARPORID);
 				ps.setInt(1, id);
 				rs = ps.executeQuery();
-				if(rs.next()) {
+				if (rs.next()) {
 					DiscosDAOImp disk = new DiscosDAOImp();
 					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
-					resultado =(new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+					resultado = (new Canciones(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
 							rs.getInt("reproducciones"), disk1, gen1));
 
 				}
@@ -211,18 +211,18 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 		con = Conexion.getConnection();
 		if (con != null) {
 			PreparedStatement ps = null;
-		
+
 			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(MOSTRARPORNOMBRE);
 				ps.setString(1, nombre);
 				rs = ps.executeQuery();
-				if(rs.next()) {
+				if (rs.next()) {
 					DiscosDAOImp disk = new DiscosDAOImp();
 					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
-					resultado =(new CancionesDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+					resultado = (new CancionesDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
 							rs.getInt("reproducciones"), disk1, gen1));
 
 				}
@@ -248,17 +248,17 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 		con = Conexion.getConnection();
 		if (con != null) {
 			PreparedStatement ps = null;
-		
+
 			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(CANCIONALEATORIA);
 				rs = ps.executeQuery();
-				if(rs.next()) {
+				if (rs.next()) {
 					DiscosDAOImp disk = new DiscosDAOImp();
 					Discos disk1 = disk.mostrarPorId(rs.getInt("id_discos"));
 					GenerosDAOImp gen = new GenerosDAOImp();
 					Generos gen1 = gen.mostrarPorId(rs.getInt("id_generos"));
-					resultado =(new CancionesDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
+					resultado = (new CancionesDAOImp(rs.getInt("id"), rs.getString("nombre"), rs.getInt("duracion"),
 							rs.getInt("reproducciones"), disk1, gen1));
 
 				}
@@ -277,5 +277,6 @@ public class CancionesDAOImp extends Canciones implements CancionesDAO {
 		}
 		return resultado;
 	}
+
 
 }

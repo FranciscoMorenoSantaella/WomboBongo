@@ -33,6 +33,10 @@ public class ElegirController {
 	private ImageView canAleB;
 	@FXML
 	private ImageView listasB;
+	
+	@FXML
+	private Button perfilB;
+	
 
 	CancionesDAOImp can = new CancionesDAOImp();
 	ObservableList<Canciones> canlist = FXCollections.observableArrayList(can.mostrarTodos());
@@ -43,7 +47,7 @@ public class ElegirController {
 
 	
 		t1.setCellValueFactory(new PropertyValueFactory<CancionesDAOImp, String>("nombre"));
-		t2.setCellValueFactory(new PropertyValueFactory<CancionesDAOImp, Integer>("duracion"));
+		t2.setCellValueFactory(new PropertyValueFactory<CancionesDAOImp, Integer>("reproducciones"));
 		System.out.println(canlist);
 		tv1.setItems(canlist);
 	}
@@ -72,6 +76,11 @@ public class ElegirController {
 	@FXML
 	private void switchToListas() throws IOException {
 		App.setRoot("Listas de reproduccion");
+	}
+	
+	@FXML
+	private void switchToPerfil() throws IOException{
+		App.setRoot("Perfil");
 	}
 
 }
