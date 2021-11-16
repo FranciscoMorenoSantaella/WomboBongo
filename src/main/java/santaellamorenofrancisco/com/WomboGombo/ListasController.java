@@ -207,11 +207,15 @@ public class ListasController {
 			alert.setContentText("No has introducido ninguna lista");
 			alert.showAndWait();
 		} else {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText(null);
+			alert.setTitle("Info");
+			alert.setContentText("Lista borrada correctamente");
 			ListaRPDAOImp lrp = new ListaRPDAOImp();
 			lrp = us1.mostrarMiLista(nombre.getText());
 			us1.borrarlistadelusuario(lrp);
 			lrp2.remove(lrp);
-			tv2.setItems(lrp2);
+			tv1.setItems(lrp2);
 			nombre.clear();
 			descripcion.clear();
 

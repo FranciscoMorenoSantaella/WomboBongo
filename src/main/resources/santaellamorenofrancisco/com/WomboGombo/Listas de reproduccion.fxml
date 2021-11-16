@@ -52,9 +52,8 @@
                         </AnchorPane>
                         <TableView fx:id="tv2" layoutX="303.0" onMouseClicked="#seleccionar" prefHeight="546.0" prefWidth="723.0">
                           <columns>
-                            <TableColumn fx:id="t3" prefWidth="223.0" text="Listas" />
-                            <TableColumn fx:id="t4" prefWidth="240.0" text="Descripcion" />
-                              <TableColumn prefWidth="259.0" text="Autor de la lista" />
+                            <TableColumn fx:id="t3" prefWidth="353.0" text="Listas" />
+                            <TableColumn fx:id="t4" prefWidth="369.0" text="Descripcion" />
                           </columns>
                         </TableView>
                      </children>

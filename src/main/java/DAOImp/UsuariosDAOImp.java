@@ -253,7 +253,6 @@ public class UsuariosDAOImp extends Usuarios implements UsuariosDAO {
 				ps.executeUpdate();
 				this.id = -1;
 				ps.executeUpdate();
-				System.out.println("borro");
 			} catch (Exception e) {
 				// TODO: handle exception
 			} finally {
